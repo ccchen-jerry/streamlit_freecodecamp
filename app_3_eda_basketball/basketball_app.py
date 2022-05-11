@@ -21,7 +21,7 @@ selected_year = st.sidebar.selectbox('Year', list(reversed(range(1950,2020))))
 def load_data(year):
     import urllib3, certifi
     https = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where(),)
-    url = https.urlopen('GET', "https://www.basketball-reference.com/leagues/NBA_" + str(selected_year) + "_per_game.html")
+    url = https.urlopen('GET', "https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_game.html")
     html = pd.read_html(url.data, header = 0)
     df = html[0]
     raw = df.drop(df[df.Age == 'Age'].index) # Deletes repeating headers in content
